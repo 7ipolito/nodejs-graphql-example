@@ -48,6 +48,7 @@ type Movie{
     BRAZIL
     CANADA
     INDIA 
+    CHILE
     GERMANY
     ARGENTINA
   }
