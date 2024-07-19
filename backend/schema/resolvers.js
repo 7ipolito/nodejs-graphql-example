@@ -1,12 +1,23 @@
 const { UserList, MovieList } = require("../FakeData");
 const _ = require("lodash");
 
+/*
+
+
+
+*/
+
+
+
+
+
 const resolvers = {
   Query: {
-    users: () => {
-      return UserList;
+    users: (parent, args, context, info) => {
+      if (UserList) return { users: UserList };
+      return { message: "Yo, there was an error" }
     },
-    user: (parent, args) => {
+    user: (parent, args, context, info) => {
       const id = args.id;
       const user = _.find(UserList, { id: Number(id) });
       return user;
@@ -55,6 +66,20 @@ const resolvers = {
       return null;
     }
 
+  },
+
+  UsersResult: {
+    __resolveType(obj) {
+      if (obj.users) {
+        return "UsersSucessfulResult"
+      }
+      if (obj.message) {
+        return "UsersErrorsResult"
+
+      }
+
+      return null
+    }
   }
 }
 

@@ -18,7 +18,7 @@ type Movie{
   isInTheaters:Boolean!
 }
   type Query{
-    users:[User!]!
+    users:UsersResult
     user(id: ID!): User!
     movies:[Movie!]!
     movie(name:String!): Movie!
@@ -52,6 +52,17 @@ type Movie{
     GERMANY
     ARGENTINA
   }
+
+  type UsersSucessfulResult{
+    users: [User!]!
+  }
+
+
+  type UsersErrorsResult{
+    message:String!
+  }
+
+  union UsersResult = UsersSucessfulResult | UsersErrorsResult 
 
 `
 
